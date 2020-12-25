@@ -1,6 +1,7 @@
 # created by virtualenv automatically
 
 !Lib/site-packages/django/contrib/auth/password_validation.py
+!Lib/site-packages/django/contrib/auth/forms.py
 
 # Django #
 *.log
