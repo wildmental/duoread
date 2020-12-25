@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block contents %}
+<div class="form-group">
+    <select class="custom-select">
+        <option selected="">정렬기준</option>
+        <option value="1">학습날짜</option>
+        <option value="2">난이도</option>
+        <option value="3">병음(A-Z)</option>
+        <option value="3">병음(Z-A)</option>
+    </select>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">단어</th>
+      <th scope="col">의미</th>
+      <th scope="col">출현 문장</th>
+      <th scope="col">단어 메모</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-light">
+      <th scope="row">
+        단어
+        <br>
+        <span class="badge badge-pill badge-primary">Primary</span>
+        <span class="badge badge-pill badge-success">Success</span>
+        <span class="badge badge-pill badge-danger">Danger</span>
+        <br>
+        <span class="badge badge-pill badge-warning">Warning</span>
+        <span class="badge badge-pill badge-info">Info</span>
+        <span class="badge badge-pill badge-light">Light</span>
+        <span class="badge badge-pill badge-dark">Dark</span>
+      </th>
+      <td>
+        단어 뜻
+        <br>
+        <button type="button" class="btn btn-link">자세히>></button>
+      </td>
+      <td>
+        단어 출현 문장
+        <br>
+        <button type="button" class="btn btn-link">문맥 다시보기>></button>
+      </td>
+      <td>
+        기존 단어 메모 내용
+        <form method="POST" action=".">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group mt-2">
+                <input type="{{ field.field.widget.input_type }}" class="form-control form-control-sm
+                {% if field.errors %}
+                is-invalid
+                {% endif %}"
+                id="{{ field.id_for_label }}"
+                placeholder="{{ field.field.widget.attrs.placeholder }}"
+                name="{{ field.name }}" />
+                {% if field.errors %}
+                <div class="invalid-feedback">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-sm">메모 저장</button>
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <a class="page-link" href="#">&laquo;</a>
+    </li>
+    <li class="page-item active">
+      <a class="page-link" href="#">1</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">3</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">4</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">5</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#">&raquo;</a>
+    </li>
+  </ul>
+</div>
+
+{% endblock %}

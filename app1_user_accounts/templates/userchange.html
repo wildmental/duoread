@@ -1,0 +1,32 @@
+{% extends "base.html"%} 
+{% block contents %}
+<div class="row mt-5 text-center">
+  <h3>사용자 계정 관리</h3>
+</div>
+<div class="row mt-4">
+  <div class="col-12">
+    <form method="POST" action=".">
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <input type="{{ field.field.widget.input_type }}" class="form-control
+          {% if field.errors %}
+           is-invalid
+          {% endif %}"
+          id="{{ field.id_for_label }}"
+          placeholder="{{ field.field.widget.attrs.placeholder }}"
+          name="{{ field.name }}" />
+          {% if field.errors %}
+          <div class="invalid-feedback">{{ field.errors }}</div>
+          {% endif %}
+      </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary mt-2">변경 정보 저장</button>
+      {%if errors%}
+        {{ errors }}
+      {% endif %}
+    </form>
+  </div>
+</div>
+{% endblock %}
