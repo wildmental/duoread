@@ -19,14 +19,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UserDocs',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('doc_title', models.CharField(default='doc_title', max_length=64, verbose_name='doc_title')),
-                ('doc_txt', models.TextField(default='doc_text', max_length=32, verbose_name='doc_text')),
-                ('doc_file', models.FileField(upload_to=app4_docs.models.user_doc_file_path, validators=[app4_docs.validators.validate_file_size], verbose_name='doc_file')),
-                ('doc_img', models.ImageField(upload_to=app4_docs.models.user_doc_img_path, validators=[app4_docs.validators.validate_file_size], verbose_name='doc_img')),
-                ('doc_group', models.CharField(default='doc_group', max_length=64, verbose_name='doc_group')),
-                ('add_dt', models.DateTimeField(auto_now_add=True, verbose_name='add_dt')),
-                ('user_id', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('doc_title', models.CharField(default='doc_title',
+                                               max_length=64, verbose_name='doc_title')),
+                ('doc_txt', models.TextField(default='doc_text',
+                                             max_length=32, verbose_name='doc_text')),
+                ('doc_file', models.FileField(upload_to=app4_docs.models.user_doc_file_path, validators=[
+                 app4_docs.validators.validate_file_10mb], verbose_name='doc_file')),
+                ('doc_img', models.ImageField(upload_to=app4_docs.models.user_doc_img_path, validators=[
+                 app4_docs.validators.validate_file_10mb], verbose_name='doc_img')),
+                ('doc_group', models.CharField(default='doc_group',
+                                               max_length=64, verbose_name='doc_group')),
+                ('add_dt', models.DateTimeField(
+                    auto_now_add=True, verbose_name='add_dt')),
+                ('user_id', models.ForeignKey(
+                    on_delete=django.db.models.deletion.RESTRICT, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': 'User Document',

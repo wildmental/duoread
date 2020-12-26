@@ -42,7 +42,7 @@ class UserLanguage(models.Model):
     )
 
     def __str__(self):
-        return "user no."+str(self.user_id)+"'s language setting"
+        return "<user no."+str(self.user_id)+"'s language setting>"
 
     class Meta:
         db_table = 'user_languages'
@@ -88,7 +88,7 @@ class AppSetting(models.Model):
     )
 
     def __str__(self):
-        return "user no"+str(self.user_id)+"'s App setting"
+        return "<user no"+str(self.user_id)+"'s App setting>"
 
     class Meta:
         db_table = 'user_app_setting'

@@ -37,7 +37,7 @@ class UserWordsCn(models.Model):
     )
 
     def __str__(self):
-        return 'User words:'+str(self.user_id)+'/'+self.word_id+'/'+str(self.word_mark)
+        return '<User words:'+str(self.user_id)+'/'+self.word_id+'/'+str(self.word_mark)+'>'
 
     class Meta:
         db_table = 'userwords_cn'
@@ -77,7 +77,7 @@ class WordMemoCn(models.Model):
     )
 
     def __str__(self):
-        return 'Word memo:'+str(self.user_id)+'/'+self.word_id+'/'+str(self.memo_txt)
+        return '<Word memo:'+str(self.user_id)+'/'+self.word_id+'/'+str(self.memo_txt)+'>'
 
     class Meta:
         db_table = 'wordmemo_cn'

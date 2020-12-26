@@ -1,7 +1,6 @@
 """model for user documents"""
 from django.db import models
-# from django.core.validators import MinValueValidator
-from app4_docs.validators import validate_file_size
+from app4_docs.validators import validate_file_10mb
 from app1_user_accounts.models import UserAccount
 
 
@@ -45,12 +44,16 @@ class UserDocs(models.Model):
     doc_file = models.FileField(
         upload_to=user_doc_file_path,
         verbose_name='doc_file',
-        validators=[validate_file_size]
+        validators=[validate_file_10mb],
+        null=True, blank=True,
+        default='no_file'
     )
     doc_img = models.ImageField(
         upload_to=user_doc_img_path,
         verbose_name='doc_img',
-        validators=[validate_file_size]
+        validators=[validate_file_10mb],
+        null=True, blank=True,
+        default='no_img'
     )
 
     # datetime
@@ -60,7 +63,7 @@ class UserDocs(models.Model):
     )
 
     def __str__(self):
-        return "user no."+str(self.user_id)+"'s language setting"
+        return "<user no."+str(self.user_id)+"'s language setting>"
 
     class Meta:
         db_table = 'user_docs'
