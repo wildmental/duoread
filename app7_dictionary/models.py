@@ -46,6 +46,9 @@ class DictionaryCn(models.Model):
         default=''
     )
 
+    def __str__(self):
+        return 'Word :'+str(self.id)+'/'+self.word
+
     class Meta:
         db_table = 'dictionary_cn'
         verbose_name = 'Word : Chinese'

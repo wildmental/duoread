@@ -42,7 +42,7 @@ class UserLanguage(models.Model):
     )
 
     def __str__(self):
-        return "user no"+str(self.user_id)+"'s language setting"
+        return "user no."+str(self.user_id)+"'s language setting"
 
     class Meta:
         db_table = 'user_languages'
@@ -60,17 +60,17 @@ class AppSetting(models.Model):
     # data fields
     screen_mode = models.CharField(
         max_length=32,
-        verbose_name='screen mode',
-        default='default theme'
+        verbose_name='screen_mode',
+        default='default_theme'
     )
     txt_size = models.IntegerField(
         validators=[MinValueValidator(7), MaxValueValidator(25)],
-        verbose_name='text size',
+        verbose_name='text_size',
         default=10
     )
     dict_size = models.IntegerField(
         validators=[MinValueValidator(7), MaxValueValidator(25)],
-        verbose_name='dict text size',
+        verbose_name='dict_text_size',
         default=10
     )
 
