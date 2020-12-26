@@ -21,8 +21,8 @@ def home(request):
 
 def logout(request):
     """this is a logout part"""
-    if request.session.get('session_id'):
-        del request.session['session_id']
+    if request.session.get('user_id'):
+        del request.session['user_id']
     return redirect('/')
 
 
@@ -32,7 +32,7 @@ def login(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             # temporary session code
-            request.session['session_id'] = form.session_id
+            request.session['user_id'] = form.user_id
             return redirect('/')
     else:
         form = LoginForm()
@@ -44,9 +44,6 @@ def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         errors = form.errors
-        # print("-----reg_vw-----")
-        # print(errors)
-        # print("----------")
         if not errors:
             username = form.cleaned_data.get('username')
             nickname = form.cleaned_data.get('nickname')
