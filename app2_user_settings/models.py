@@ -63,15 +63,17 @@ class AppSetting(models.Model):
         verbose_name='screen_mode',
         default='default_theme'
     )
-    txt_size = models.IntegerField(
+    txt_size = models.DecimalField(
+        max_digits=3, decimal_places=1,
         validators=[MinValueValidator(7), MaxValueValidator(25)],
         verbose_name='text_size',
-        default=10
+        default=12
     )
-    dict_size = models.IntegerField(
+    dict_size = models.DecimalField(
+        max_digits=3, decimal_places=1,
         validators=[MinValueValidator(7), MaxValueValidator(25)],
         verbose_name='dict_text_size',
-        default=10
+        default=11
     )
 
     # boolean fields (agreements)

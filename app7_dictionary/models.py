@@ -47,7 +47,7 @@ class DictionaryCn(models.Model):
     )
 
     def __str__(self):
-        return 'Word :'+str(self.id)+'/'+self.word
+        return 'Word: '+str(self.id)+'/'+self.word
 
     class Meta:
         db_table = 'dictionary_cn'

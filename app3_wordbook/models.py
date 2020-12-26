@@ -60,7 +60,7 @@ class WordMemoCn(models.Model):
 
     # data field
     memo_txt = models.CharField(
-        max_length=64,
+        max_length=100,
         verbose_name='memo_text',
         default=''
     )

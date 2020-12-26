@@ -73,6 +73,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.media',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -139,3 +140,13 @@ STATICFILES_DIRS = [
 
 DATE_INPUT_FORMATS = ['%m/%d/%Y']
 AUTH_USER_MODEL = 'app1_user_accounts.UserAccount'
+
+# needs some experiment to figure out how exactly MEDIA_URL works
+MEDIA_URL = '/media/'
+# MEDIA_ROOT is "absolute" filesystem path
+MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
+
+# if __name__ == "__main__":
+#     print(STATICFILES_DIRS)
+#     print(type(*STATICFILES_DIRS))
+#     print(MEDIA_ROOT)
