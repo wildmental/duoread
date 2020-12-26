@@ -3,9 +3,9 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 
 
-def validate_file_size(value):
+def validate_file_size(file):
     """custom file size validator"""
-    filesize = value.size
+    filesize = file.size
 
     if filesize > 10485760:
         raise ValidationError(
@@ -13,4 +13,4 @@ def validate_file_size(value):
             _("최대 10MB까지 업로드할 수 있습니다.")
         )
     else:
-        return value
+        return file

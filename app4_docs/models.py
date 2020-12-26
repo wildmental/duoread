@@ -35,6 +35,13 @@ class UserDocs(models.Model):
         verbose_name='doc_text',
         default='doc_text'
     )
+    doc_group = models.CharField(
+        max_length=64,
+        verbose_name='doc_group',
+        default='doc_group'
+    )
+
+    # file fields
     doc_file = models.FileField(
         upload_to=user_doc_file_path,
         verbose_name='doc_file',
@@ -44,11 +51,6 @@ class UserDocs(models.Model):
         upload_to=user_doc_img_path,
         verbose_name='doc_img',
         validators=[validate_file_size]
-    )
-    doc_group = models.CharField(
-        max_length=64,
-        verbose_name='doc_group',
-        default='doc_group'
     )
 
     # datetime
