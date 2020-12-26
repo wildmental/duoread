@@ -2,7 +2,10 @@
 Models Belongs to app2_user_settings
 """
 from django.db import models
+from django.core.validators import MinValueValidator
+from django.core.validators import MaxValueValidator
 from app1_user_accounts.models import UserAccount
+
 
 # Create your models here.
 
@@ -45,3 +48,47 @@ class UserLanguage(models.Model):
         db_table = 'user_languages'
         verbose_name = 'User Language'
         verbose_name_plural = 'User Languages'
+
+
+class AppSetting(models.Model):
+    """User's App setting"""
+
+    # a foreign key field from UserAccount
+    user_id = models.ForeignKey(UserAccount,
+                                on_delete=models.RESTRICT)
+
+    # data fields
+    screen_mode = models.CharField(
+        max_length=32,
+        verbose_name='screen mode',
+        default='default theme'
+    )
+    txt_size = models.IntegerField(
+        validators=[MinValueValidator(7), MaxValueValidator(25)],
+        verbose_name='text size',
+        default=10
+    )
+    dict_size = models.IntegerField(
+        validators=[MinValueValidator(7), MaxValueValidator(25)],
+        verbose_name='dict text size',
+        default=10
+    )
+
+    # boolean fields (agreements)
+    notice_on = models.BooleanField(default=False)
+    sms_agree = models.BooleanField(default=False)
+    email_agree = models.BooleanField(default=False)
+
+    # datetime
+    set_dt = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='setting modified at'
+    )
+
+    def __str__(self):
+        return "user no"+str(self.user_id)+"'s App setting"
+
+    class Meta:
+        db_table = 'user_app_setting'
+        verbose_name = 'User App Setting'
+        verbose_name_plural = 'User App Settings'
