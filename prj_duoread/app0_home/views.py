@@ -2,7 +2,7 @@
 from django.shortcuts import render
 # from django.http import HttpResponse
 # from django.utils import timezone
-# from app1_user_accounts.models import UserAccount
+from app1_user_accounts.models import UserAccount
 
 
 # Create your views here.
@@ -10,6 +10,9 @@ from django.shortcuts import render
 
 def home(request):
     """this is a home page"""
-    # if session_id:
-    #     user_account = UserAccount.objects.get(pk=session_id)
-    return render(request, "welcome.html")
+    userid = request.session['user']
+    if request.session.user:
+        user_account = UserAccount.objects.get(pk=userid)
+        return render(request, "member_home.html", user_account)
+    else:
+        return render(request, "welcome.html")

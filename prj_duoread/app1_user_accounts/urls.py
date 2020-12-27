@@ -2,7 +2,7 @@
 UserAccounts urls
 """
 from django.urls import path
-from . import views
+from app1_user_accounts import views
 
 app_name = 'user_accounts'
 urlpatterns = [
