@@ -89,8 +89,12 @@ WSGI_APPLICATION = 'prj_duoread.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'prj_duoread',
+        'USER': 'wildmental',
+        'PASSWORD': 'healer2011',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
 

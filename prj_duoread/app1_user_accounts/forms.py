@@ -14,20 +14,20 @@ from app1_user_accounts.models import UserAccount
 class LoginForm(forms.Form):
     """login form"""
     username = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': '아이디(이메일 주소) 입력'}),
+        widget=forms.TextInput(attrs={'placeholder': _('아이디(이메일 주소) 입력')}),
         error_messages={
-            'required': '아이디는 필수 입력값입니다.',
-            'max_length': '아이디 최대 길이는 %(limit_value)d자 입니다. (현재입력 %(show_value)d자)'
+            'required': _('아이디는 필수 입력값입니다.'),
+            'max_length': _('아이디 최대 길이는 %(limit_value)d자 입니다. (현재입력 %(show_value)d자)')
         },
-        label='아이디',
+        label=_('아이디'),
         max_length=UserAccount._meta.get_field('username').max_length
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder': '비밀번호 입력'}),
+        widget=forms.PasswordInput(attrs={'placeholder': _('비밀번호 입력')}),
         error_messages={
-            'required': '비밀번호는 필수 입력값입니다.'
+            'required': _('비밀번호는 필수 입력값입니다.')
         },
-        label='비밀번호'
+        label=_('비밀번호')
     )
 
     class Meta:

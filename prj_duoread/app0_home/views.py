@@ -10,9 +10,15 @@ from app1_user_accounts.models import UserAccount
 
 def home(request):
     """this is a home page"""
-    userid = request.session['user']
-    if request.session.user:
-        user_account = UserAccount.objects.get(pk=userid)
-        return render(request, "member_home.html", user_account)
+    res_data = {}
+    try:
+        user = request.session['user']
+    except KeyError:
+        user = None
+    if user:
+        user_account = UserAccount.objects.get(pk=user)
+        res_data['username'] = user_account.username
+        res_data['nickname'] = user_account.nickname
+        return render(request, "member_home.html", res_data)
     else:
         return render(request, "welcome.html")
