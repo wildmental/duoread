@@ -2,7 +2,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.utils import timezone
-from django.http import HttpResponse
 
 from app1_user_accounts.models import UserAccount
 from app1_user_accounts.forms import LoginForm

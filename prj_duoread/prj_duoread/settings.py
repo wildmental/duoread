@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # core apps
+    # core functions
+    'app0_home',
     'app1_user_accounts',
     'app2_user_settings',
     'app3_wordbook',
@@ -49,9 +50,11 @@ INSTALLED_APPS = [
     # for management
     'app7_dictionary',
     'app8_statistics',
+    'app10_subscription',
 
     # for future update
     'app9_tutoring',
+
 ]
 
 MIDDLEWARE = [

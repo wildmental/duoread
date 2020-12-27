@@ -12,4 +12,4 @@ def home(request):
     """this is a home page"""
     # if session_id:
     #     user_account = UserAccount.objects.get(pk=session_id)
-    return render(request, "home.html")
+    return render(request, "welcome.html")

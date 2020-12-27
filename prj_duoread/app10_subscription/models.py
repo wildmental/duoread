@@ -3,7 +3,7 @@ from django.db import models
 from app1_user_accounts.models import UserAccount
 
 
-class Subscribtion(models.Model):
+class Subscription(models.Model):
     """User subscribtion data"""
 
     # a foreign key field from UserAccount
@@ -50,7 +50,7 @@ class UsageLimits(models.Model):
     member_grade = models.CharField(
         max_length=64,
         verbose_name='member_grade',
-        default='free_trial'
+        default='none_payment'
     )
     word_mark_limit = models.IntegerField(
         verbose_name='word_mark_limit',
@@ -71,6 +71,6 @@ class UsageLimits(models.Model):
                       self.doc_import_limit, self.doc_max_size))
 
     class Meta:
-        db_table = 'subscribtion'
-        verbose_name = 'User Document'
-        verbose_name_plural = 'User Documents'
+        db_table = 'usage_limit'
+        verbose_name = 'usage limit level'
+        verbose_name_plural = 'usage limit settings'
