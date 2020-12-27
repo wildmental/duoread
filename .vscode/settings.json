@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": ".\\Scripts\\python.exe",
+    "python.pythonPath": "duoread_venv\\Scripts\\python.exe",
     "python.linting.pylintArgs": [
         "--load-plugins=pylint_django",
         "--disable=E0401,C0415,attribute-defined-outside-init"
