@@ -9,16 +9,6 @@ from app1_user_accounts.forms import LoginForm
 from app1_user_accounts.forms import RegisterForm
 
 
-def home(request):
-    """this is a home page"""
-    # temporary session code
-    session_id = request.session.get('session_id')
-    if session_id:
-        user_account = UserAccount.objects.get(pk=session_id)
-        return HttpResponse(str(user_account.nickname) + '<br>' + str(timezone.now()) + str(request_data))
-    return HttpResponse('home!', timezone.now())
-
-
 def logout(request):
     """this is a logout part"""
     if request.session.get('user_id'):
