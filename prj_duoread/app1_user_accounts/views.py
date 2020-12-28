@@ -10,8 +10,7 @@ from app1_user_accounts.forms import RegisterForm
 
 def logout(request):
     """this is a logout part"""
-    user = request.session.get('user')
-    if user:
+    if request.session.get('user'):
         del request.session['user']
     return redirect('/')
 
@@ -22,7 +21,7 @@ def login(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             # temporary session code
-            request.session['user'] = form.user_id
+            request.session['user'] = form.user
             return redirect('/')
     else:
         form = LoginForm()

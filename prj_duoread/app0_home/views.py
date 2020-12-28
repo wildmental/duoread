@@ -13,12 +13,13 @@ def home(request):
     res_data = {}
     try:
         user = request.session['user']
-    except KeyError:
+        if user:
+            user_account = UserAccount.objects.get(pk=user)
+            res_data['username'] = user_account.username
+            res_data['nickname'] = user_account.nickname
+            return render(request, "member_home.html", res_data)
+    except Exception:
         user = None
-    if user:
-        user_account = UserAccount.objects.get(pk=user)
-        res_data['username'] = user_account.username
-        res_data['nickname'] = user_account.nickname
-        return render(request, "member_home.html", res_data)
-    else:
-        return render(request, "welcome.html")
+        error = Exception.__dict__
+        res_data['error'] = error
+    return render(request, "welcome.html", res_data)

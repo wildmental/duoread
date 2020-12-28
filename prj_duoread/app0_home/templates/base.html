@@ -4,10 +4,14 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <!-- Bootstrap CSS -->
     <link href="/static/bootswatch_sketchy.min.css" rel="stylesheet" />
-
+    <!-- Custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'normalize.css' %}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
     <title>다독 - 다국어 독서 파트너</title>
   </head>
   <body>
@@ -15,7 +19,26 @@
     {% block contents %}
     {% endblock %}
     </div>
-
+    <footer class="footer">
+      <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="" class="lang">한국어</a></li>
+            <li class="breadcrumb-item active"><a href="" class="lang">English</a></li>
+            <li class="breadcrumb-item active"><a href="" class="lang">中文</a></li>
+            <hr>
+            <li class="breadcrumb-item active"><a href="" class="sitemap">사전신청</a></li>
+            <li class="breadcrumb-item active"><a href="" class="sitemap">계정만들기</a></li>
+            <li class="breadcrumb-item active"><a href="" class="sitemap">로그인</a></li>
+            <li class="breadcrumb-item active"><a href="" class="sitemap">둘러보기</a></li>
+            <li class="breadcrumb-item active"><a href="" class="sitemap">소식</a></li>
+            <li class="breadcrumb-item active"><a href="" class="sitemap">커뮤니티</a></li>
+            <li class="breadcrumb-item active"><a href="" class="sitemap">이용약관</a></li>
+            <li class="breadcrumb-item active"><a href="" class="sitemap">고객센터</a></li>
+          </ul>        
+        <div class="copyright text-right">©2020 MakersWorld. all rights reserved.</div>
+        <br />
+      </div>
+    </footer>
     <!-- Separated Popper and Bootstrap JS -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
@@ -27,5 +50,6 @@
       integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
       crossorigin="anonymous"
     ></script>
+
   </body>
 </html>

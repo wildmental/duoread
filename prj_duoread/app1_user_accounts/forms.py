@@ -49,7 +49,7 @@ class LoginForm(forms.Form):
                 self.add_error("password", '비밀번호가 틀립니다.')
             else:
                 # temporary session code
-                self.user_id = user_account.pk
+                self.user = user_account.pk
 
 
 class RegisterForm(UserCreationForm):
