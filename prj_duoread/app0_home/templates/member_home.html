@@ -3,7 +3,11 @@
 {% block contents %}
     {% comment %} sessionID : {{session_id}}
     <br> {% endcomment %}
-    username : {{username}}
+    {{user}}
     <br>
-    nickname : {{nickname}}
+    username : {{user.username}}
+    <br>
+    nickname : {{user.nickname}}
+    <br>
+    
 {% endblock %}

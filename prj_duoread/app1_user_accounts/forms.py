@@ -125,7 +125,7 @@ class RegisterForm(UserCreationForm):
         return password2
 
 
-class ProfileChangeForm(UserChangeForm):
+class UserUpdateForm(UserChangeForm):
 
     def __init__(self, request, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -176,8 +176,7 @@ class ProfileChangeForm(UserChangeForm):
         ]
 
     def clean(self):
-        user_id = self.request.session['user_id']
-        user_account = UserAccount.objects.get(pk=user_id)
+        user_account = self.request.user
 
         cleaned_data = super().clean()
         if not cleaned_data.get('birthdate'):

@@ -9,10 +9,10 @@
   <div class="col-12">
     <form method="POST" action=".">
       {% csrf_token %}
-      {% if username %}
+      {% if user %}
       <div class="mb-4">
         <p>아이디</p>
-        <p class="text-primary">{{ username }}
+        <p class="text-primary">{{ user.username }}
           <span class="text-muted"> / 아이디는 변경할 수 없습니다.</span>
         </p>
       </div>  
@@ -27,7 +27,7 @@
           id="{{ field.id_for_label }}"
           placeholder="{% if field.field.widget.attrs.placeholder %}{{ field.field.widget.attrs.placeholder}}{% endif %}"
           name="{{ field.name }}"
-          value="{% ifequal field.name 'username' %}{{ username }}{% endifequal %}{% ifequal field.name 'nickname' %}{{ nickname }}{% endifequal %}{% ifequal field.name 'birthdate' %}{{ birthdate|date:"m/d/Y" }}{% endifequal %}" />
+          value="{% ifequal field.name 'username' %}{{ user.username }}{% endifequal %}{% ifequal field.name 'nickname' %}{{ user.nickname }}{% endifequal %}{% ifequal field.name 'birthdate' %}{{ user.birthdate|date:"m/d/Y" }}{% endifequal %}" />
           {% if field.errors %}
           <div class="invalid-feedback">{{ field.errors }}</div>
           {% endif %}

@@ -7,4 +7,5 @@ from app0_home import views
 app_name = 'home'
 urlpatterns = [
     path('', views.home, name='home'),
+    path('mailing/', views.mailing, name='mailing'),
 ]

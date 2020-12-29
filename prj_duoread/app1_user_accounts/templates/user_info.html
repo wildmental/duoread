@@ -9,15 +9,15 @@
   <div class="col-12">
     <div class="mb-4">
       <p>아이디</p>
-      <p class="text-primary lead"><strong>{{ username }}</strong></p>
+      <p class="text-primary lead"><strong>{{ user.username }}</strong></p>
     </div>
     <div class="mb-4">
       <p>사용자 이름</p>
-      <p class="text-primary lead"><strong>{{nickname}}</strong></p>
+      <p class="text-primary lead"><strong>{{ user.nickname}}</strong></p>
     </div>
     <div class="mb-4">
       <p>생년월일</p>
-      <p class="text-primary lead"><strong>{{birthdate|date:'Y년 m월 d일'}}</strong></p>
+      <p class="text-primary lead"><strong>{{ user.birthdate|date:'Y년 m월 d일'}}</strong></p>
     </div>
     <button type="button" class="btn btn-success mr-2" onclick="location.href='/account/update/'">사용자 정보 수정</button> 
     <div class="mb-2"></div>

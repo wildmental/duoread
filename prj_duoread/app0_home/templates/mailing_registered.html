@@ -1,0 +1,17 @@
+{% extends "base.html"%} 
+{% block contents %}
+<div class="row mt-5 text-center">
+    {% if result %}
+    <div class="jumbotron mx-auto">
+        <h1>{{ result }}주소로
+        <br>메일링 신청이 완료되었습니다.</h1>
+        <hr class="my-4 border-black">
+        <p class="lead">
+            매일 아침 메일로 발송되는<br>
+            학습자료와 함께 다독을 즐겨보세요!
+        </p>
+        <a class="btn btn-lg btn-primary" href="/" role="button">메인화면</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

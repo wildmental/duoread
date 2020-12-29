@@ -111,17 +111,18 @@
               </h3>
               <br>
               <label class="control-label">메일 수신등록</label>
-              <div class="form-group mb-5">
+              <form method="POST" class="form-group mb-5" action="/mailing/">
+                {% csrf_token %}
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">✉</span>
                   </div>
-                  <input type="text" class="form-control" aria-label="input email address" placeholder='이메일 주소 입력'>
+                  <input type="text" class="form-control" name="mailing" placeholder='이메일 주소 입력'>
                   <div class="input-group-append">
-                    <a class="input-group-text" href='#'>신청</a>
+                    <button type="submit" class="input-group-text">신청</button>
                   </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>  
           <hr>
