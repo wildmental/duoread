@@ -21,6 +21,9 @@ urlpatterns = [
     # app urls
     path('', include('app0_home.urls')),
     path('account/', include('app1_user_accounts.urls')),
+    path('setting/', include('app2_user_settings.urls')),
     path('wordbook/', include('app3_wordbook.urls')),
+    path('docs/', include('app4_docs.urls')),
+
     path('tutorboard/', include('app9_tutoring.urls')),
 ]

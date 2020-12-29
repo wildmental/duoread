@@ -49,7 +49,7 @@ class LoginForm(forms.Form):
                 self.add_error("password", '비밀번호가 틀립니다.')
             else:
                 # temporary session code
-                self.user = user_account.pk
+                self.user_id = user_account.pk
 
 
 class RegisterForm(UserCreationForm):
@@ -121,18 +121,72 @@ class RegisterForm(UserCreationForm):
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
             self.add_error('password2', "비밀번호 확인을 정확히 입력해 주세요.")
+        # check if this return is needed or not.
         return password2
 
 
-class UserChangeFrom(UserChangeForm):
+class ProfileChangeForm(UserChangeForm):
+
+    def __init__(self, request, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.request = request
+
     """user info change form"""
+    nickname = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': _('변경할 사용자 이름 입력 (미입력시 현 사용자명 유지)')
+            }
+        ),
+        error_messages={
+            'min_length': _('사용자 이름 최소 길이는 %(limit_value)d자 입니다. (현재 입력 %(show_value)d자)'),
+            'max_length': _('사용자 이름 최대 길이는 %(limit_value)d자 입니다. (현재 입력 %(show_value)d자)')
+        },
+        min_length=5,
+        max_length=32,
+        label=_('사용자 이름*'),
+        required=False
+    )
+    birthdate = forms.DateField(
+        widget=forms.DateInput(
+            attrs={'placeholder': _(
+                'ex) 12/31/2020 = 2020년 12월 31일 (미입력시 현재 생일 유지)')}
+        ),
+        label=_('생년월일'),
+        required=False
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={'placeholder': _("변경사항 저장을 위해 비밀번호를 입력해 주세요.")}
+        ),
+        error_messages={
+            'required': _('비밀번호는 필수 입력값입니다.'),
+            'min_length': _('비밀번호 최소 길이는 %(limit_value)d자 입니다. (현재 입력 %(show_value)d자)'),
+            'max_length': _('비밀번호 최대 길이는 %(limit_value)d자 입니다. (현재 입력 %(show_value)d자)')
+        },
+        label='비밀번호*',
+        min_length=8,
+        max_length=32
+    )
 
     class Meta:
         model = UserAccount
-        fields = '__all__'
-        field_classes = {'username': UsernameField}
+        fields = [
+            'nickname', 'birthdate'
+        ]
 
-    def clean_password(self):
-        print('[' + str(datetime.now()) + '] ' +
-              '<UserAccount : %s> update' % self.initial.get('nickname'))
-        return self.initial.get('password')
+    def clean(self):
+        user_id = self.request.session['user_id']
+        user_account = UserAccount.objects.get(pk=user_id)
+
+        cleaned_data = super().clean()
+        if not cleaned_data.get('birthdate'):
+            cleaned_data['birthdate'] = user_account.birthdate
+        if not cleaned_data.get('nickname'):
+            cleaned_data['nickname'] = user_account.nickname
+        else:
+            nickname = cleaned_data.get('nickname')
+        password = cleaned_data.get('password')
+        if nickname and password:
+            if not check_password(password, user_account.password):
+                self.add_error("password", '비밀번호가 틀립니다.')

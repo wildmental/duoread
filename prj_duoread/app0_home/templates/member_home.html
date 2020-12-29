@@ -1,11 +1,9 @@
 {% extends "base.html" %}
 
 {% block contents %}
-    {{session.sessionId}}
+    {% comment %} sessionID : {{session_id}}
+    <br> {% endcomment %}
+    username : {{username}}
     <br>
-    {{session.user}}
-    <br>
-    {{username}}
-    <br>
-    {{nickname}}
+    nickname : {{nickname}}
 {% endblock %}

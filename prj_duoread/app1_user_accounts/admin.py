@@ -6,7 +6,6 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from app1_user_accounts.forms import RegisterForm
-from app1_user_accounts.forms import UserChangeFrom
 from app1_user_accounts.models import UserAccount
 
 # Register your models here.
@@ -16,7 +15,6 @@ class UserAccountAdimn(BaseUserAdmin):
     """
     Edit UserAccount Data Expression on Admin Site
     """
-    form = UserChangeFrom
     add_form = RegisterForm
 
     list_display = ('id', 'username', 'nickname',

@@ -1,0 +1,44 @@
+{% extends "base.html"%} 
+{% block contents %}
+<div class="row mt-5 text-center">
+</div>
+<div class="row mt-4">
+  <div class="col-12 mb-4">
+    <h3>사용자 정보 업데이트</h3>
+  </div>
+  <div class="col-12">
+    <form method="POST" action=".">
+      {% csrf_token %}
+      {% if username %}
+      <div class="mb-4">
+        <p>아이디</p>
+        <p class="text-primary">{{ username }}
+          <span class="text-muted"> / 아이디는 변경할 수 없습니다.</span>
+        </p>
+      </div>  
+      {% endif %}
+      {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <input type="{{ field.field.widget.input_type }}" class="form-control
+          {% if field.errors %}
+           is-invalid
+          {% endif %}"
+          id="{{ field.id_for_label }}"
+          placeholder="{% if field.field.widget.attrs.placeholder %}{{ field.field.widget.attrs.placeholder}}{% endif %}"
+          name="{{ field.name }}"
+          value="{% ifequal field.name 'username' %}{{ username }}{% endifequal %}{% ifequal field.name 'nickname' %}{{ nickname }}{% endifequal %}{% ifequal field.name 'birthdate' %}{{ birthdate|date:"m/d/Y" }}{% endifequal %}" />
+          {% if field.errors %}
+          <div class="invalid-feedback">{{ field.errors }}</div>
+          {% endif %}
+      </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-success mt-2 mr-2">변경 정보 저장</button>
+      <button type="button" class="btn btn-primary mt-2" onclick="location.href='/account/info/'">수정 취소</button> 
+      {%if errors%}
+        {{ errors }}
+      {% endif %}
+    </form>
+  </div>
+</div>
+{% endblock %}

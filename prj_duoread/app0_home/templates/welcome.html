@@ -1,94 +1,114 @@
 {% extends "base.html" %}
 
 {% block contents %}
-    <nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top">
-      <a class="navbar-brand" href="#"><h2 class='logo ml-3 mt-3'>다독</h1></a>
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse" id="navbarColor01" style="">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">홈
-                <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">다운로드</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">커뮤니티</a>
-            </li>
-            <li class="nav-item mr-4">
-                <a class="nav-link" href="#">후원</a>
-            </li>
-        </ul>
-        <button type="button" class="btn btn-success mr-2" onclick="location.href='/account/login/'">로그인</button>
-        <button type="button" class="btn btn-info mr-1" onclick="location.href='/account/register/'">회원가입</button>
-      </div>  
-    </nav> 
-    
     <main class="container-fluid">
       <div class="container-fluid mt-5 pt-4"></div>
       <div class="container text-center mb-3">
         <h1 class="display-3">다독에 오신 것을<br>환영합니다.</h1>
         <hr>
         <p class="h2">
-        영어/중국어 언제까지 사전 찾아가며 읽으실 건가요? <br />
+        영어/중국어 언제까지 사전 찾아가며 읽으실래요? <br />
         외국어를 읽는 최고의 방법, 다독을 시작하세요!<br />
         </p>
+        {{ session.sessionId }}
       </div>
       <hr>
       <div class="container-float">
         <div class="main-content">
-          <h2 class="text-success">
-            외국어 능력 향상, 독해가 아니라 독서가 필요합니다.
-          </h2>
-          <p class="main-desc">
-            해외 뉴스, 전문자료, SNS 등 어떤 글이라도 줄줄 막힘없이 읽고 싶은
-            당신.<br />
-            어려운 전문용어, 자유롭게 변형된 표현, 잘 쓰지 않아서 생소한
-            표현까지,<br />
-            일일이 찾아보며 읽느라 집중과 흐름이 뚝 끊기지는 않으셨나요? <br />
-            매번 화면을 바꿔 사전을 검색하는 데 지치지는 않으셨나요?
-          </p>
-          <h2 class="text-info">
-            이제 다독으로 외국어를 막힘없이 빠르게 읽으세요!
-          </h2>
-          <p class="main-desc">
-            모바일과 PC에서 창을 바꿔가며 외국어를 읽는 번거로움을 잘 알기에<br />
-            외국어를 유창히 읽고 싶은 분을 위한 최적의 환경을 만들었습니다.<br />
-            보조창 크기 조절, 아는단어 숨기기, 새로 배운단어 저장까지<br />
-            다독으로 당신에게 딱 맞는 외국어 읽기 환경을 만나보세요.
-          </p>
-          <h2 class="text-danger">
-            외웠던 단어, 한번 익힌 표현, 이제 다신 놓치지 마세요
-          </h2>
-          <p class="main-desc">
-            새로 읽은 글과 새로 익힌 단어를 한데 모아 관리할 수 있다면
-            어떨까요?<br />
-            당신의 외국어 실력이 튼튼해지는 외국어 독서의 완벽한 동반자<br />
-            다독은 당신이 새로 배운 표현을 맥락까지 통째로 보기 편하게 보관해
-            줍니다<br />
-            다독과 함께라면 언제든 내가 읽은 표현 그대로 복습할 수 있어요!<br />
-          </p>
-          <h2 class="main-title">
-            다독과 함께 즐거운 외국어 읽기를 시작하세요!
-          </h2>
-          <p class="main-desc">
-            외국어 읽기가 편리해졌다면 남은건 이제 다독을 통한 실력향상 뿐!<br />
-            다독은 당신의 읽기 습관까지 모니터링하고 관리해준답니다.<br />
-            독서량과 읽기 패턴을 분석하고 개선방법도 제안해주는 다독!<br />
-            그야말로 외국어 실력을 키우기 위한 완벽한 파트너 아닐까요?<br />
-          </p>
+            <div class="Media">
+                <img
+                    class="Media-figure Image"
+                    src=""
+                    alt="img_placeholder"
+                    width=75
+                />
+                <div class="Media-body">
+                    <h3 class="Media-title text-success">
+                    글 읽기에 최적화된<br>
+                    다독 원터치 사전!</h3>
+                    <p>
+                    다독은 당신이 외국어 글을 읽을 때<br>
+                    모르는 단어를 사전에 일일이 찾는것이<br>
+                    얼마나 귀찮은지 잘 알고 있습니다.<br>
+                    집중과 흐름이 뚝 끊기는 그 순간들,<br />
+                    다독의 원터치 사전으로 안녕입니다.
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="Media Media--reverse">
+                <img
+                    class="Media-figure Image"
+                    src=""
+                    alt="img_placeholder"
+                    width=75
+                />
+                <div class="Media-body">
+                    <h3 class="Media-title text-info">
+                    당신의 편안한 eBook!<br>
+                    다독 컴포트 북리더</h3>
+                    <p>
+                    텍스트, 워드, Epub 등<br>
+                    다양한 형식의 파일을 지원하는<br>
+                    당신 손안의 편안한 이북리더.<br>
+                    이제 다독 컴포트 북리더<br>
+                    하나만 챙기세요!
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="Media">
+                <img
+                    class="Media-figure Image"
+                    src=""
+                    alt="img_placeholder"
+                    width=75
+                />
+                <div class="Media-body">
+                    <h3 class="Media-title text-danger">
+                    독서 중 배운 단어를<br>
+                    문장까지 통째로 저장,<br>
+                    다독 올인원 단어장!</h3>
+                    <p>
+                    "아, 이 단어 뭐더라?" 하는 그 순간<br>
+                    내가 단어를 처음 만났던 문맥을<br>
+                    그대로 꺼내볼 수 있다면 어떨까요?<br>
+                    다독 올인원 단어장으로<br>
+                    외웠던 단어를 생생하게 복습하세요.<br />
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="Media Media--reverse">
+                <img
+                    class="Media-figure Image"
+                    src=""
+                    alt="img_placeholder"
+                    width=75
+                />
+                <div class="Media-body">
+                    <h3 class="Media-title text-warning">
+                    독서/학습 통계로<br>
+                    늘어가는 실력 확인! <br>
+                    다독 독서 모니터!</h3>
+                    <p>
+                    외국어 읽기가 편리해졌다면<br>
+                    남은건 이제 다독을 통한 실력향상 뿐!<br>
+                    다독 독서 모니터로<br>
+                    당신의 독서습관을 확인하세요
+                    </p>
+                </div>
+            </div>
         </div>
         <div class="side-content">
           <div class="infos">
             <div class="mailing">
-              <h2 class="mailing-title">
-                다독 메일링 등록하고 <br>
-                학습자료와 소식을<br> 메일로 받아보세요
-              </h2>
+              <h3 class="mailing-title">
+                다독 메일링 등록<br>
+                <small class="text-muted">
+                학습자료와 소식을 <br>
+                메일로 받아보세요</small>
+              </h3>
               <br>
               <label class="control-label">메일 수신등록</label>
               <div class="form-group mb-5">
@@ -106,7 +126,7 @@
           </div>  
           <hr>
           <div class="infos get-involved">
-            <h2 class="infos-title">다독 커뮤니티</h2>
+            <h3 class="infos-title">다독 커뮤니티</h3>
             <div class="community">커뮤니티 최신 게시물</div>
             <br>
             <div class="card border-primary mb-3" style="max-width: 20rem;">
@@ -117,6 +137,20 @@
                 </div>
             </div>
             <a href="" class="more">커뮤니티 둘러보기</a>
+          </div>
+          <hr>
+          <div class="infos update-news">
+            <h3 class="infos-title">버전 업데이트 정보</h3>
+            <div class="update-news">현재 버전 0.0.1</div>
+            <br>
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">업데이트 날짜</div>
+                <div class="card-body">
+                    <h4 class="card-title">업데이트 제목</h4>
+                    <p class="card-text">업데이트 상세 내용이 여기에 표시됩니다.</p>
+                </div>
+            </div>
+            <a href="" class="more">업데이트 히스토리</a>
           </div>
         </div>
       </div>

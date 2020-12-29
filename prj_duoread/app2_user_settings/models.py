@@ -10,7 +10,7 @@ from app1_user_accounts.models import UserAccount
 # Create your models here.
 
 
-class UserLanguage(models.Model):
+class LangSetting(models.Model):
     """UserLanguages setting"""
 
     # a foreign key field from UserAccount
