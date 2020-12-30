@@ -17,8 +17,8 @@ class DictionaryCn(models.Model):
         default='',
         null=True
     )
-    definition = models.CharField(
-        max_length=64,
+    definition = models.TextField(
+        max_length=450,
         verbose_name='definition',
         default=''
     )
@@ -26,24 +26,25 @@ class DictionaryCn(models.Model):
         max_length=64,
         verbose_name='word_group',
         default='',
-        null=True
+        null=True, blank=True
     )
     frequency = models.CharField(
         max_length=64,
         verbose_name='frequency',
         default='',
-        null=True
+        null=True, blank=True
     )
     topic_group = models.CharField(
         max_length=64,
         verbose_name='topic_group',
         default='',
-        null=True
+        null=True, blank=True
     )
     manage_code = models.CharField(
         max_length=64,
         verbose_name='manage_code',
-        default=''
+        default='',
+        null=True, blank=True
     )
 
     def __str__(self):

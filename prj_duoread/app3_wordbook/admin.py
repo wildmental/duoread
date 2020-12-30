@@ -2,18 +2,16 @@
 Edit the Admin Site From Here
 """
 from django.contrib import admin
-from .models import WordMemoCn
+from app3_wordbook.models import UserWordsCn
 
 # Register your models here.
 
 
-class WordmemoCnAdimn(admin.ModelAdmin):
-    """
-    Edit Wordmemo Data Expression on Admin Site
-    """
+class WordBookCnAdmin(admin.ModelAdmin):
+    """wordbook in admin"""
     list_display = ('id', 'user_id', 'word_id',
-                    'memo_txt', 'add_dt', 'update_dt')
+                    'word_mark', 'add_dt', 'update_dt')
     ordering = ('id',)
 
 
-admin.site.register(WordMemoCn, WordmemoCnAdimn)
+admin.site.register(UserWordsCn, WordBookCnAdmin)

@@ -86,7 +86,7 @@ class UserAccount(AbstractBaseUser):
     objects = UserManager()
 
     def __str__(self):
-        return '<UserAccount: '+self.nickname+'>'
+        return '<UserAccount: '+self.username+'>'
 
     def has_perm(self, perm, obj=None):
         """calls upper perm check"""

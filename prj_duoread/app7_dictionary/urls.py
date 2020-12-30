@@ -2,8 +2,9 @@
 app ______ urls
 """
 from django.urls import path
+from app7_dictionary import views
 
-# app_name = '__________'
+app_name = ''
 urlpatterns = [
-    # path('register/', views.register, name='register'),
+    path('', views.DictionaryCnView.as_view(), name='dictionary_cn'),
 ]

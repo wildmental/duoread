@@ -1,6 +1,7 @@
 """this is a home view"""
 from django.shortcuts import render
-
+from app0_home.models import Mailing
+from django.views.generic.edit import CreateView
 
 # Create your views here.
 
@@ -19,8 +20,9 @@ def home(request):
     return render(request, "welcome.html", res_data)
 
 
-def mailing(request):
+def mailing_register(request):
     """requesting mailing service"""
     if request.method == "POST":
         email = request.POST['mailing']
-    return render(request, 'mailing_registered.html', {"result": email})
+        mailing = Mailing.objects.get_or_create(email=email)
+    return render(request, 'mailing_registered.html', {"email": email})

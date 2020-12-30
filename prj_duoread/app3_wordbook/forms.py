@@ -1,11 +1,16 @@
 """forms for user accounts"""
 from django import forms
-from .models import WordMemoCn
+from app3_wordbook.models import UserWordsCn
 
 
-class WordmemoForm(forms.Form):
-    """Wordmemo Form"""
-    wordmemo = forms.CharField(
+class UserWordsCnForm(forms.Form):
+    """User Words Marking Form"""
+
+    word_mark = forms.ChoiceField(
+        choices=('V', 'U', 'K', 'C'),
+        label='단어 분류'
+    )
+    memo_txt = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': '단어 메모 입력'}),
         error_messages={
             'required': '메모가 입력되지 않았습니다.'
@@ -14,12 +19,5 @@ class WordmemoForm(forms.Form):
     )
 
     class Meta:
-        model = WordMemoCn
-        fields = ['wordmemo']
-
-    def clean(self):
-        cleaned_data = super().clean()
-        wordmemo = cleaned_data.get('wordmemo')
-
-        if wordmemo:
-            self.wordmemo = wordmemo
+        model = UserWordsCn
+        fields = ['word_mark', 'memo_txt']

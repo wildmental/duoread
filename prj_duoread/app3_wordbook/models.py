@@ -18,12 +18,35 @@ class UserWordsCn(models.Model):
         DictionaryCn,
         on_delete=models.RESTRICT
     )
-
-    # data field
+    # choice field
+    VIEWED = 'V'
+    UNKNOWN = 'U'
+    KNOWN = 'K'
+    CONFUSING = 'C'
+    WORD_MARK_CHOICES = [
+        (VIEWED, 'Viewed'),
+        (UNKNOWN, 'Unknown'),
+        (KNOWN, 'Known'),
+        (CONFUSING, 'Confusing')
+    ]
     word_mark = models.CharField(
-        max_length=64,
+        max_length=1,
         verbose_name='word_mark',
-        default=''
+        choices=WORD_MARK_CHOICES,
+        default=VIEWED,
+    )
+    # data field
+    memo_txt = models.CharField(
+        max_length=200,
+        verbose_name='memo_text',
+        default='',
+        null=True, blank=True
+    )
+    word_context = models.CharField(
+        max_length=200,
+        verbose_name='word_context',
+        default='',
+        null=True, blank=True
     )
     # datetime
     add_dt = models.DateTimeField(
@@ -33,53 +56,14 @@ class UserWordsCn(models.Model):
     # auto now VS auto now add - need to figure out
     update_dt = models.DateTimeField(
         auto_now=True,
-        verbose_name='updated_datetime'
+        verbose_name='updated_datetime',
+        null=True, blank=True
     )
 
     def __str__(self):
-        return '<User words:'+str(self.user_id)+'/'+self.word_id+'/'+str(self.word_mark)+'>'
+        return '<User words:'+str(self.user_id)+'/'+str(self.word_id)+'/'+str(self.word_mark)+'>'
 
     class Meta:
         db_table = 'userwords_cn'
-        verbose_name = "user's word mark"
-        verbose_name_plural = 'user wordbook'
-
-
-class WordMemoCn(models.Model):
-    """Simple addon upon user wordbook"""
-    # foreign key field from UserAccount
-    user_id = models.ForeignKey(
-        UserAccount,
-        on_delete=models.RESTRICT
-    )
-    # foreign key field from Dictionary
-    word_id = models.ForeignKey(
-        DictionaryCn,
-        on_delete=models.RESTRICT
-    )
-
-    # data field
-    memo_txt = models.CharField(
-        max_length=100,
-        verbose_name='memo_text',
-        default=''
-    )
-
-    # datetime
-    add_dt = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='added_datetime'
-    )
-    # auto now VS auto now add - need to figure out
-    update_dt = models.DateTimeField(
-        auto_now=True,
-        verbose_name='updated_datetime'
-    )
-
-    def __str__(self):
-        return '<Word memo:'+str(self.user_id)+'/'+self.word_id+'/'+str(self.memo_txt)+'>'
-
-    class Meta:
-        db_table = 'wordmemo_cn'
-        verbose_name = 'WordMemo'
-        verbose_name_plural = 'WordMemos'
+        verbose_name = "User Marked Word"
+        verbose_name_plural = 'User WordBook'
