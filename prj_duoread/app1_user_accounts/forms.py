@@ -89,18 +89,18 @@ class RegisterForm(UserCreationForm):
             'min_length': _('비밀번호 최소 길이는 %(limit_value)d자 입니다. (현재 입력 %(show_value)d자)'),
             'max_length': _('비밀번호 최대 길이는 %(limit_value)d자 입니다. (현재 입력 %(show_value)d자)')
         },
-        label='비밀번호*',
+        label=_('비밀번호*'),
         min_length=8,
         max_length=32
     )
     password2 = forms.CharField(
         widget=forms.PasswordInput(
-            attrs={'placeholder': '비밀번호를 한번 더 입력해주세요'}
+            attrs={'placeholder': _('비밀번호를 한번 더 입력해주세요')}
         ),
         error_messages={
-            'required': '비밀번호 확인은 필수 입력값입니다.'
+            'required': _('비밀번호 확인은 필수 입력값입니다.')
         },
-        label='비밀번호 확인*'
+        label=_('비밀번호 확인*')
     )
     birthdate = forms.DateField(
         widget=forms.DateInput(
@@ -188,4 +188,4 @@ class UserUpdateForm(UserChangeForm):
         password = cleaned_data.get('password')
         if nickname and password:
             if not check_password(password, user_account.password):
-                self.add_error("password", '비밀번호가 틀립니다.')
+                self.add_error("password", _('비밀번호가 틀립니다.'))

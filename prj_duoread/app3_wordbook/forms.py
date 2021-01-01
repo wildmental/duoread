@@ -1,23 +1,27 @@
 """forms for user accounts"""
 from django import forms
+from django.utils.translation import gettext as _
 from app3_wordbook.models import UserWordsCn
+from django.forms.fields import validators
 
 
-class UserWordsCnForm(forms.Form):
-    """User Words Marking Form"""
+class UserWordsCnMemoForm(forms.Form):
+    """User Words Memo Form"""
 
-    word_mark = forms.ChoiceField(
-        choices=('V', 'U', 'K', 'C'),
-        label='단어 분류'
-    )
     memo_txt = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': '단어 메모 입력'}),
+        widget=forms.TextInput(attrs={'placeholder': _('단어 메모 입력')}),
+        label=_('단어 메모'),
         error_messages={
-            'required': '메모가 입력되지 않았습니다.'
+            'max_length': _('단어메모 최대 길이는 %(limit_value)d자 입니다.<br>(현재 입력 %(show_value)d자)'),
         },
-        label='단어 메모'
+        max_length=100,
+        validators=[validators.MaxLengthValidator, ],
+        required=False
     )
+
+    def clean(self):
+        cleaned_data = super().clean()
 
     class Meta:
         model = UserWordsCn
-        fields = ['word_mark', 'memo_txt']
+        fields = ['memo_txt', ]

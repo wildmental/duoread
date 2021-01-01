@@ -14,18 +14,19 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col">구분</th>
-      <th scope="col">단어</th>
-      <th scope="col" style="width: 25%">의미</th>
-      <th scope="col" style="width: 25%">출현 문장</th>
-      <th scope="col">단어 메모</th>
+      <th scope="col" style="width: 8%">구분</th>
+      <th scope="col" style="width: 8%">단어</th>
+      <th scope="col" style="width: 30%">의미</th>
+      <th scope="col" style="width: 6%">출현빈도</th>
+      <th scope="col" style="width: 25%">출현문장</th>
+      <th scope="col">단어메모</th>
     </tr>
   </thead>
   <tbody>
     <tr class="table-light">
       <th scope="row">
         구분<br>
-        <span class="badge badge-pill badge-light">읽은단어</span>(자동추가됨)<br>
+        <span class="badge badge-pill badge-light">읽은단어</span><br><small>(자동추가됨)</small>
         <span class="badge badge-pill badge-light">아는단어</span><br>
         <span class="badge badge-pill badge-light">모르는단어</span><br>
         <span class="badge badge-pill badge-light">햇갈리는단어</span><br>
@@ -41,18 +42,24 @@
         <span class="badge badge-pill badge-primary">HSK5</span>
         <span class="badge badge-pill badge-danger">HSK6</span>
       </td>
-      <td style="width: 25%">
+      <td>
         단어 뜻
         <br>
         <button type="button" class="btn btn-link">자세히>></button>
       </td>
-      <td style="width: 25%">
+      <td>
+        매우높음<br>
+        높음<br>
+        중간<br>
+        낮음<br>
+        매우낮음
+      </td>
+      <td>
         단어 출현 문장
         <br>
         <button type="button" class="btn btn-link">문맥 자세히>></button>
       </td>
       <td>
-        기존 단어 메모 내용
         <form method="POST" action=".">
         {% csrf_token %}
         {% for field in form %}
@@ -63,6 +70,7 @@
                 {% endif %}"
                 id="{{ field.id_for_label }}"
                 placeholder="{{ field.field.widget.attrs.placeholder }}"
+                value='기존 단어 메모 내용'
                 name="{{ field.name }}" />
                 {% if field.errors %}
                 <div class="invalid-feedback">{{ field.errors }}</div>
@@ -78,15 +86,63 @@
       <th>
         {% ifequal word.word_mark 'V' %}
         <span class="badge badge-pill badge-light">읽은단어</span>
+        <form method='POST' action="/wordbook/mark_update/{{ word.id }}/">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="hidden" name="userword_id" value="{{ word.id }}">
+          <select class="custom-select" name='word_mark' onchange="this.form.submit()">
+            <option selected="V">읽은단어</option>
+            <option value="K">아는단어</option>
+            <option value="U">모르는단어</option>
+            <option value="C">햇갈리는 단어</option>
+          </select>
+        </div>
+        </form>
         {% endifequal %}
         {% ifequal word.word_mark 'K' %}
         <span class="badge badge-pill badge-light">아는단어</span>
+        <form method='POST' action="/wordbook/mark_update/{{ word.id }}/">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="hidden" name="userword_id" value="{{ word.id }}">
+          <select class="custom-select" name='word_mark' onchange="this.form.submit()">
+            <option selected="K">아는단어</option>
+            <option value="V">읽은단어</option>
+            <option value="U">모르는단어</option>
+            <option value="C">햇갈리는 단어</option>
+          </select>
+        </div>
+        </form>
         {% endifequal %}
         {% ifequal word.word_mark 'U' %}
         <span class="badge badge-pill badge-light">모르는단어</span>
+        <form method='POST' action="/wordbook/mark_update/{{ word.id }}/">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="hidden" name="userword_id" value="{{ word.id }}">
+          <select class="custom-select" name='word_mark' onchange="this.form.submit()">
+            <option selected="U">모르는단어</option>
+            <option value="V">읽은단어</option>
+            <option value="K">아는단어</option>
+            <option value="C">햇갈리는 단어</option>
+          </select>
+        </div>
+        </form>
         {% endifequal %}
         {% ifequal word.word_mark 'C' %}
         <span class="badge badge-pill badge-light">햇갈리는단어</span>
+        <form method='POST' action="/wordbook/mark_update/{{ word.id }}/">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="hidden" name="userword_id" value="{{ word.id }}">
+          <select class="custom-select" name='word_mark' onchange="this.form.submit()">
+            <option selected="C">햇갈리는 단어</option>
+            <option value="V">읽은단어</option>
+            <option value="K">아는단어</option>
+            <option value="U">모르는단어</option>
+          </select>
+        </div>
+        </form>
         {% endifequal %}
       </th>
       <th scope="row">
@@ -112,19 +168,21 @@
         <span class="badge badge-pill badge-danger">{{ word.word_id.word_group }}</span>
         {% endifequal %}
       </th>
-      <td style="width: 25%">
+      <td>
         {{ word.word_id.definition }}
         <br>
         <button type="button" class="btn btn-link">자세히>></button>
       </td>
-      <td style="width: 25%">
+      <td>
+        {{ word.word_id.frequency }}
+      </td>
+      <td>
         {{ word.word_context }}
         <br>
         <button type="button" class="btn btn-link">문맥 자세히>></button>
       </td>
       <td>
-        {{ word.memo_txt }}
-        <form method="POST" action=".">
+        <form method="POST" action="/wordbook/memo_update/{{ word.id }}/">
         {% csrf_token %}
         {% for field in form %}
             <div class="form-group mt-2">
@@ -134,13 +192,15 @@
                 {% endif %}"
                 id="{{ field.id_for_label }}"
                 placeholder="{{ field.field.widget.attrs.placeholder }}"
+                value="{{ word.memo_txt }}"
                 name="{{ field.name }}" />
-                {% if field.errors %}
-                <div class="invalid-feedback">{{ field.errors }}</div>
-                {% endif %}
             </div>
         {% endfor %}
-        <button type="submit" class="btn btn-primary btn-sm">메모추가</button>
+        <button type="submit" class="btn btn-primary btn-sm">메모수정</button>
+        {% if mark_edited == word.id %}
+        {% if errors %}<span class="text-danger d-block mt-1">{{ errors.memo_txt.as_text|safe }}{{ errors|safe }}</span>
+        {% else %}<span class="text-success d-block mt-1">메모가 수정되었습니다.</span>
+        {% endif %}{% endif %}
         </form>
       </td>
     </tr>

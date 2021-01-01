@@ -37,13 +37,13 @@ class UserWordsCn(models.Model):
     )
     # data field
     memo_txt = models.CharField(
-        max_length=200,
+        max_length=100,
         verbose_name='memo_text',
         default='',
         null=True, blank=True
     )
     word_context = models.CharField(
-        max_length=200,
+        max_length=100,
         verbose_name='word_context',
         default='',
         null=True, blank=True
