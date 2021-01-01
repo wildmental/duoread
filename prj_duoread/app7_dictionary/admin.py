@@ -1,8 +1,8 @@
 from django.contrib import admin
-from app7_dictionary.models import DictionaryCn
+from app7_dictionary.models import DictCn
 
 
-class DictionaryCnAdimn(admin.ModelAdmin):
+class DictCnAdimn(admin.ModelAdmin):
     """
     Edit Chinese Dictionary Data Expression on Admin Site
     """
@@ -12,4 +12,4 @@ class DictionaryCnAdimn(admin.ModelAdmin):
     ordering = ('id',)
 
 
-admin.site.register(DictionaryCn, DictionaryCnAdimn)
+admin.site.register(DictCn, DictCnAdimn)

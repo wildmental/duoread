@@ -1,7 +1,7 @@
 """this is models.py for app3_wordbook """
 from django.db import models
 from app1_user_accounts.models import UserAccount
-from app7_dictionary.models import DictionaryCn
+from app7_dictionary.models import DictCn
 
 # Create your models here.
 
@@ -15,7 +15,7 @@ class UserWordsCn(models.Model):
     )
     # foreign key field from Dictionary
     word_id = models.ForeignKey(
-        DictionaryCn,
+        DictCn,
         on_delete=models.RESTRICT
     )
     # choice field

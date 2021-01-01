@@ -1,9 +1,10 @@
 """
-app ______ urls
+app reader urls
 """
 from django.urls import path
+from app5_reader import views
 
-# app_name = '__________'
+app_name = 'reader'
 urlpatterns = [
-    # path('register/', views.register, name='register'),
+    path('', views.read_view, name='read'),
 ]

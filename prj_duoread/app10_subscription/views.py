@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def enroll_view(request):
+    pass
+
+
+def update_view(request):
+    pass

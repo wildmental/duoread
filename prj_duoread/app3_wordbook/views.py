@@ -7,7 +7,7 @@ from django.views.generic.detail import DetailView
 
 from django.shortcuts import render
 from app3_wordbook.models import UserWordsCn
-from app7_dictionary.models import DictionaryCn
+from app7_dictionary.models import DictCn
 
 
 def wordbook(request):

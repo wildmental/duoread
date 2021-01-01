@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'app3_wordbook',
     'app4_docs',
     'app5_reader',
-    'app6_messagebox',
+    'app6_message',
     'app7_dictionary',
     'app8_statistics',
     'app9_tutoring',

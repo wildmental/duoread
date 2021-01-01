@@ -1,0 +1,16 @@
+{% extends "base.html"%} 
+{% block contents %}
+<div class="container">
+  <div class="row mt-5 text-center">
+    <h1>문서 가져오기</h1>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="내 문서로 추가">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

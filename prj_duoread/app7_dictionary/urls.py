@@ -6,5 +6,7 @@ from app7_dictionary import views
 
 app_name = ''
 urlpatterns = [
-    path('', views.DictionaryCnView.as_view(), name='dictionary_cn'),
+    path('cndic', views.DictCnView.as_view(), name='cndic'),
+    path('endic', views.DictEnView.as_view(), name='endic'),
+    # path('krdic', views.DictKrView.as_view(), name='krdic'),
 ]
