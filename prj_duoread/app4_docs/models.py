@@ -30,9 +30,10 @@ class UserDocs(models.Model):
         default='doc_title'
     )
     doc_txt = models.TextField(
-        max_length=32,
+        max_length=2048,
         verbose_name='doc_text',
-        default='doc_text'
+        null=True, blank=True,
+        default='no_text_added'
     )
     doc_group = models.CharField(
         max_length=64,
@@ -46,14 +47,14 @@ class UserDocs(models.Model):
         verbose_name='doc_file',
         validators=[validate_file_10mb],
         null=True, blank=True,
-        default='no_file'
+        default=None
     )
     doc_img = models.ImageField(
         upload_to=user_doc_img_path,
         verbose_name='doc_img',
         validators=[validate_file_10mb],
         null=True, blank=True,
-        default='no_img'
+        default=None
     )
 
     # datetime

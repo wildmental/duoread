@@ -6,8 +6,8 @@ from app4_docs import views
 
 app_name = 'docs'
 urlpatterns = [
-    path('import/', views.DocCreate.as_view(), name='import'),
+    path('create/', views.DocCreate.as_view(), name='create'),
     path('list/', views.DocList.as_view(), name='list'),
     path('recent/', views.Recent.as_view(), name='recent'),
-    path('update/', views.ModelUpdateView.as_view(), name='update'),
+    path('update/', views.docs_update, name='update'),
 ]

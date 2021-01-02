@@ -82,7 +82,13 @@ class WordBookCn(ListView):
         return context
 
 
-class WordAdd(FormView):
+def reader_word_add(request, pk):
+    """This is for user adding word from duo dic in reader"""
+    pass
+
+
+def dic_word_add(request, pk):
+    """This is for user adding word from dictionary"""
     pass
 
 

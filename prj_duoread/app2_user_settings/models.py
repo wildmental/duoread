@@ -11,27 +11,39 @@ from app1_user_accounts.models import UserAccount
 
 
 class LangSetting(models.Model):
-    """UserLanguages setting"""
+    """User's Languages setting"""
 
     # a foreign key field from UserAccount
     user_id = models.ForeignKey(UserAccount,
                                 on_delete=models.RESTRICT)
 
-    # data fields
+    # choice OPTIONS
+    CHINESE = 'CN'
+    KOREAN = 'KR'
+    ENGLISH = 'EN'
+    LANGUAGE_CHOICES = [
+        (CHINESE, 'Chinese'),
+        (KOREAN, 'Korean'),
+        (ENGLISH, 'English'),
+    ]
+    # choice fields
     native_lang = models.CharField(
-        max_length=32,
+        max_length=2,
         verbose_name='native_lang',
+        choices=LANGUAGE_CHOICES,
         default='native_lang'
     )
     target_lang1 = models.CharField(
-        max_length=32,
+        max_length=2,
         verbose_name='target_lang1',
-        default='target_lang1'
+        choices=LANGUAGE_CHOICES,
+        default=CHINESE
     )
     target_lang2 = models.CharField(
-        max_length=32,
+        max_length=2,
         verbose_name='target_lang2',
-        default=None,
+        choices=LANGUAGE_CHOICES,
+        default=ENGLISH,
         null=True, blank=True
     )
 
@@ -58,6 +70,21 @@ class AppSetting(models.Model):
                                 on_delete=models.RESTRICT)
 
     # data fields
+    # # choice field
+    # DEFAULT = 'DF'
+    # DARK_MODE = 'DK'
+    # BRIGHT_MODE = 'BR'
+    # SCREEN_CHOICES = [
+    #     (DEFAULT, 'Default'),
+    #     (DARK_MODE, 'Dark'),
+    #     (BRIGHT_MODE, 'Light'),
+    # ]
+    # word_mark = models.CharField(
+    #     max_length=1,
+    #     verbose_name='word_mark',
+    #     choices=WORD_MARK_CHOICES,
+    #     default=VIEWED,
+    # )
     screen_mode = models.CharField(
         max_length=32,
         verbose_name='screen_mode',

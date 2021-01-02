@@ -20,10 +20,6 @@ class DocCreate(CreateView):
     template_name = "doc_create.html"
 
 
-class DocImport(FormView):
-    pass
-
-
 class DocList(ListView):
     pass
 
@@ -35,3 +31,8 @@ class Recent(ListView):
 class ModelUpdateView(UpdateView):
     model = UserDocs
     template_name = "doc_update.html"
+
+
+def docs_update(request, pk):
+    """gets the original doc and allow user to revise them"""
+    pass

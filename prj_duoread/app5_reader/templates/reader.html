@@ -1,0 +1,25 @@
+{% extends "base.html"%} 
+{% block contents %}
+<div class="row mt-5 text-center">
+    {% if doc %}
+    <div class="jumbotron mx-auto">
+        <h1>글 제목</h1>
+        <hr class="my-4 border-black">
+        <p class="lead">
+            글 내용
+        </p>
+        <a class="btn btn-lg btn-primary" href="/account/login/" role="button">로그인</a>
+    </div>
+    {% endif %}
+    <div class="jumbotron mx-auto fixed-bottom">
+    {% comment %} {% if word == words.word %} {% endcomment %}
+        <h1>단어<small class='text-muted'>[발음]</small></h1>
+        <p class="lead">
+            단어 의미 1 <br>
+            단어 의미 2 <br>
+        </p>
+        <a class="btn btn-lg btn-primary" href="/account/login/" role="button">로그인</a>
+    </div>
+    {% comment %} {% endif %} {% endcomment %}
+</div>
+{% endblock %}
