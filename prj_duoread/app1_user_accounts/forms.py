@@ -43,10 +43,10 @@ class LoginForm(forms.Form):
             try:
                 user_account = UserAccount.objects.get(username=username)
             except UserAccount.DoesNotExist:
-                self.add_error('username', "입력한 아이디가 존재하지 않습니다.")
+                self.add_error('username', _("입력한 아이디가 존재하지 않습니다."))
                 return
             if not check_password(password, user_account.password):
-                self.add_error("password", '비밀번호가 틀립니다.')
+                self.add_error("password", _('비밀번호가 틀립니다.'))
             else:
                 # temporary session code
                 self.user_id = user_account.pk

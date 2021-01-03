@@ -17,9 +17,9 @@ class DocCreationText(forms.ModelForm):
         widget=forms.TextInput(attrs={'placeholder': _('문서 제목 입력')}),
         label=_('문서 제목'),
         error_messages={
-            'max_length': _('문서 제목의 최대 길이는 %(limit_value)d자 입니다.<br>(현재 입력 %(show_value)d자)'),
+            'max_length': _('문서 제목의 최대 길이는 %(limit_value)d자 입니다. (현재 입력 %(show_value)d자)'),
         },
-        help_text=_('제목란을 비워 둘 경우 "연번(책장별)/책장구분코드/문서첫단어/날짜"로 자동 설정됩니다.'),
+        help_text=_('제목란을 비워 둘 경우 "연번(책장별)/문서첫단어/날짜"로 자동 설정됩니다.'),
         max_length=64,
         validators=[validators.MaxLengthValidator, ],
         required=False
@@ -29,7 +29,7 @@ class DocCreationText(forms.ModelForm):
             '문서 내용을 여기에 복사해 넣으세요 (최대 길이 1,000자)')}),
         label=_('문서 내용'),
         error_messages={
-            'max_length': _('텍스트 입력 최대 길이는 %(limit_value)d자 입니다.<br>(현재 입력 %(show_value)d자)'),
+            'max_length': _('텍스트 입력 최대 길이는 %(limit_value)d자 입니다. (현재 입력 %(show_value)d자)'),
             'required': _('문서 내용란은 공란으로 남겨둘 수 없습니다.')
         },
         help_text=_(
@@ -63,31 +63,29 @@ class DocCreationText(forms.ModelForm):
         doc_title = cleaned_data.get('doc_title')
         doc_txt = cleaned_data.get('doc_txt')
         doc_group = cleaned_data.get('doc_group')
-        print("------------------------------------------")
-        print(doc_title)
-        print(doc_txt)
-        print(doc_group)
-        print("------------------------------------------")
-
-        if doc_title == '':
-            try:
-                user_docs = UserDocs.objects.get(user_id=user)
-                shelf_requested = user_docs.filter(doc_group=doc_group)
-                docnum = shelf_div.count()+1
-            except UserDocs.DoesNotExist:
-                docnum = 1
-            finally:
-                dt = datetime.now().isoformat()[0:8]
-                doc_title = '/'.join([str(docnum), doc_group,
-                                      doc_txt.split(' ')[0], dt])
-            print(doc_title)
-            print("------------------------------------------")
-        if doc_title and doc_txt and doc_group:
-            created_doc = UserDocs(user_id=user,
-                                   doc_title=doc_title,
-                                   doc_txt=doc_txt,
-                                   doc_group=doc_group)
-            created_doc.save()
+        if doc_txt is None:
+            pass
+        else:
+            if doc_title == '':
+                try:
+                    user_docs = UserDocs.objects.all().filter(user_id=user)
+                    shelf_requested = user_docs.filter(doc_group=doc_group)
+                    docnum = shelf_requested.count()+1
+                except UserDocs.DoesNotExist:
+                    docnum = 1
+                finally:
+                    dt = str(datetime.now().date())
+                    first_word = doc_txt.split(' ')[0] if len(
+                        doc_txt.split(' ')[0]) <= 10 else doc_txt.split(' ')[0][0:10]
+                    doc_title = '/'.join([str(docnum), first_word, dt])
+            if doc_group is None:
+                self.add_error('doc_group', _("알수없는 이유로 책장이 선택되지 않았습니다."))
+            else:
+                created_doc = UserDocs(user_id=user,
+                                       doc_title=doc_title,
+                                       doc_txt=doc_txt,
+                                       doc_group=doc_group)
+                created_doc.save()
 
     class Meta:
         model = UserDocs
@@ -100,7 +98,7 @@ class DocCreationFile(forms.ModelForm):
         widget=forms.TextInput(attrs={'placeholder': _('문서 제목 입력')}),
         label=_('문서 제목'),
         error_messages={
-            'max_length': _('문서 제목의 최대 길이는 %(limit_value)d자 입니다.<br>(현재 입력 %(show_value)d자)'),
+            'max_length': _('문서 제목의 최대 길이는 %(limit_value)d자 입니다. (현재 입력 %(show_value)d자)'),
         },
         help_text=_('제목란을 비워 둘 경우 "연번(책장별)/파일명/날짜"로 자동 설정됩니다.'),
         max_length=64,
@@ -111,7 +109,7 @@ class DocCreationFile(forms.ModelForm):
         label=_('파일 가져오기'),
         max_length=50,
         error_messages={
-            'max_length': _('가져올 파일의 이름은 최대 %(max)d자 입니다.<br>(현재 입력 %(length)d자)'),
+            'max_length': _('가져올 파일의 이름은 최대 %(max)d자 입니다. (현재 입력 %(length)d자)'),
         },
     )
 
@@ -148,7 +146,7 @@ class DocCreationImage(forms.ModelForm):
         widget=forms.TextInput(attrs={'placeholder': _('문서 제목 입력')}),
         label=_('문서 제목'),
         error_messages={
-            'max_length': _('문서 제목의 최대 길이는 %(limit_value)d자 입니다.<br>(현재 입력 %(show_value)d자)'),
+            'max_length': _('문서 제목의 최대 길이는 %(limit_value)d자 입니다. (현재 입력 %(show_value)d자)'),
         },
         help_text=_('제목란을 비워 둘 경우 "연번(책장별)/파일명/날짜"로 자동 설정됩니다.'),
         max_length=64,
@@ -159,7 +157,7 @@ class DocCreationImage(forms.ModelForm):
         label=_('이미지 가져오기'),
         max_length=50,
         error_messages={
-            'max_length': _('가져올 이미지의 파일명은 최대 %(max)d자 입니다.<br>(현재 입력 %(length)d자)'),
+            'max_length': _('가져올 이미지의 파일명은 최대 %(max)d자 입니다. (현재 입력 %(length)d자)'),
         },
     )
 

@@ -21,7 +21,9 @@
             {% endfor %}
           </select>
           {% elif field.name == "doc_txt" %}
-          <textarea class="form-control" 
+          <textarea class="form-control {% if field.errors %}
+            is-invalid
+            {% endif %}"" 
             id="{{ field.id_for_label }}" 
             name="{{ field.name }}"
             rows="10"
@@ -51,7 +53,7 @@
           <p class="text-info my-1">{{field.help_text|safe}}</p>
           {% endif %}
           {% if field.errors %}
-          <div class="invalid-feedback">{{ field.errors }}</div>
+          <div class="invalid-feedback">{{ field.errors.as_text|safe }}</div>
           {% endif %}
         </div>
         {% endfor %}

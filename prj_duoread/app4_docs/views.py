@@ -1,5 +1,6 @@
 """user docs view control"""
 from django.shortcuts import render
+from django.db.models import Count
 
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import FormView
@@ -59,7 +60,18 @@ class DocCreationImageView(FormView):
 
 
 class DocList(ListView):
-    pass
+    model = UserDocs
+    template_name = "doc_list.html"
+    context_object_name = 'doc_list'
+
+    def get_queryset(self):
+        user = self.request.user
+        all_docs = UserDocs.objects.all().filter(user_id=user.id).defer(
+            'user_id', 'update_dt').order_by('id')
+        queryset = {
+            'all_docs': all_docs
+        }
+        return queryset
 
 
 class Recent(ListView):
