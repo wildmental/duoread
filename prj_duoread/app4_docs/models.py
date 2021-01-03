@@ -35,10 +35,24 @@ class UserDocs(models.Model):
         null=True, blank=True,
         default='no_text_added'
     )
+    # choice field
+    DEFAULT = 'DF'
+    CASUAL = 'CA'
+    NEWS = 'NA'
+    LITERATURE = 'LI'
+    ACADEMIC = 'AC'
+    DOC_GROUP_CHOICES = [
+        (DEFAULT, 'Default group'),
+        (CASUAL, 'Casual (SNS, etc.)'),
+        (NEWS, 'News Articles'),
+        (LITERATURE, 'Literatures'),
+        (ACADEMIC, 'Academic article'),
+    ]
     doc_group = models.CharField(
-        max_length=64,
+        max_length=2,
         verbose_name='doc_group',
-        default='doc_group'
+        choices=DOC_GROUP_CHOICES,
+        default=DEFAULT,
     )
 
     # file fields
@@ -56,11 +70,16 @@ class UserDocs(models.Model):
         null=True, blank=True,
         default=None
     )
-
     # datetime
     add_dt = models.DateTimeField(
         auto_now_add=True,
-        verbose_name='add_dt'
+        verbose_name='add_dt',
+        null=True, blank=True,
+    )
+    update_dt = models.DateTimeField(
+        auto_now_add=False,
+        verbose_name='update_dt',
+        null=True, blank=True,
     )
 
     def __str__(self):

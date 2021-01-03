@@ -16,9 +16,10 @@
     <tr>
       <th scope="col" style="width: 8%">구분</th>
       <th scope="col" style="width: 8%">단어</th>
-      <th scope="col" style="width: 30%">의미</th>
+      <th scope="col" style="width: 8%">발음</th>
+      <th scope="col" style="width: 25%">의미</th>
       <th scope="col" style="width: 6%">출현빈도</th>
-      <th scope="col" style="width: 25%">출현문장</th>
+      <th scope="col" style="width: 20%">출현문장</th>
       <th scope="col">단어메모</th>
     </tr>
   </thead>
@@ -36,11 +37,15 @@
         <br>
         <span class="badge badge-pill badge-warning">HSK1</span>
         <span class="badge badge-pill badge-success">HSK2</span>
-        <span class="badge badge-pill badge-info">HSK3</span>
         <br>
+        <span class="badge badge-pill badge-info">HSK3</span>
         <span class="badge badge-pill badge-secondary">HSK4</span>
+        <br>
         <span class="badge badge-pill badge-primary">HSK5</span>
         <span class="badge badge-pill badge-danger">HSK6</span>
+      </td>
+      <td>
+        발음
       </td>
       <td>
         단어 뜻
@@ -146,8 +151,7 @@
         {% endifequal %}
       </th>
       <th scope="row">
-        <h3 class="table-word d-inline">{{ word.word_id.word }}</h3>
-        <span class="text-muted">{{ word.word_id.pronounciation }}</span>
+        <h2 class="table-word d-inline">{{ word.word_id.word }}</h2>
         {% ifequal word.word_id.word_group 'HSK1' %}
         <br>
         <span class="badge badge-pill badge-warning">{{ word.word_id.word_group }}</span>
@@ -168,6 +172,9 @@
         <span class="badge badge-pill badge-danger">{{ word.word_id.word_group }}</span>
         {% endifequal %}
       </th>
+      <td>
+        <p class="text-muted">{{ word.word_id.pronounciation }}</p>
+      </td>
       <td>
         {{ word.word_id.definition }}
         <br>

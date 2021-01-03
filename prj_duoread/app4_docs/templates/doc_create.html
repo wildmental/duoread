@@ -6,10 +6,58 @@
   </div>
   <div class="row mt-4">
     <div class="col-12">
-      <form method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="내 문서로 추가">
+    <hr>
+      <form method="POST" action=".">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {% if field.name == "doc_group" %}
+          <select class="custom-select" 
+            id="{{ field.id_for_label }}"
+            name="{{ field.name }}">
+            {% for choice in field.field.choices %}
+            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+            {% endfor %}
+          </select>
+          {% elif field.name == "doc_txt" %}
+          <textarea class="form-control" 
+            id="{{ field.id_for_label }}" 
+            name="{{ field.name }}"
+            rows="10"
+            placeholder="{{ field.field.widget.attrs.placeholder }}"></textarea>
+          {% elif field.name == "doc_file" or field.name == "doc_img"%}
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="{{ field.id_for_label }}">
+              <label class="custom-file-label" for="{{ field.id_for_label }}">파일 선택</label>
+            </div>
+          </div>
+          {% else %}
+          <input type="{{ field.field.widget.input_type }}" class="form-control
+            {% if field.errors %}
+            is-invalid
+            {% endif %}"
+            id="{{ field.id_for_label }}"
+            {% if field.field.widget.attrs.placeholder %}
+            placeholder="{{ field.field.widget.attrs.placeholder}}"
+            {% endif %}
+            name="{{ field.name }}"
+            value="{% ifequal field.name 'username' %}{{ user.username }}{% endifequal %}{% ifequal field.name 'nickname' %}{{ user.nickname }}{% endifequal %}{% ifequal field.name 'birthdate' %}{{ user.birthdate|date:"m/d/Y" }}{% endifequal %}" />
+          {% endif %}
+          {% if field.help_text == "doc_txt" %}
+          <p class="text-info my-1">{{field.help_text}}</p>
+          {% else %}
+          <p class="text-info my-1">{{field.help_text|safe}}</p>
+          {% endif %}
+          {% if field.errors %}
+          <div class="invalid-feedback">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+        <input type="submit" value="책장에 문서 저장">
       </form>
+      <hr>
     </div>
   </div>
 </div>

@@ -9,9 +9,9 @@ from app4_docs.models import UserDocs
 class UserDocsAdmin(admin.ModelAdmin):
     """UserDocs in admin"""
     list_display = ('id', 'user_id', 'doc_title',
-                    'doc_text', 'doc_group',
+                    'doc_txt', 'doc_group',
                     'doc_file', 'doc_img',
-                    'add_dt')
+                    'add_dt', 'update_dt')
     ordering = ('id',)
 
 

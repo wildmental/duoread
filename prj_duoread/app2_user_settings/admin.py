@@ -13,7 +13,7 @@ class LangSetAdimn(admin.ModelAdmin):
     list_display = ('id', 'user_id', 'native_lang',
                     'target_lang1', 'target_lang2', 'set_dt')
     fieldsets = (
-        ('User info', {'fields': ('user_id')}),
+        ('User info', {'fields': ('user_id',)}),
         ('Language setting', {'fields': ('native_lang',
                                          'target_lang1',
                                          'target_lang2')}),
@@ -36,7 +36,7 @@ class AppSetAdimn(admin.ModelAdmin):
                     'notice_on', 'sms_agree', 'email_agree',
                     'set_dt')
     fieldsets = (
-        ('User info', {'fields': ('user_id')}),
+        ('User info', {'fields': ('user_id',)}),
         ('App setting', {'fields': ('screen_mode',
                                     'txt_size',
                                     'dict_size')}),

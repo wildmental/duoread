@@ -5,7 +5,7 @@ from app3_wordbook.models import UserWordsCn
 from django.forms.fields import validators
 
 
-class UserWordsCnMemoForm(forms.Form):
+class UserWordsCnMemoForm(forms.ModelForm):
     """User Words Memo Form"""
 
     memo_txt = forms.CharField(

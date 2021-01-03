@@ -69,27 +69,23 @@ class AppSetting(models.Model):
     user_id = models.ForeignKey(UserAccount,
                                 on_delete=models.RESTRICT)
 
-    # data fields
-    # # choice field
-    # DEFAULT = 'DF'
-    # DARK_MODE = 'DK'
-    # BRIGHT_MODE = 'BR'
-    # SCREEN_CHOICES = [
-    #     (DEFAULT, 'Default'),
-    #     (DARK_MODE, 'Dark'),
-    #     (BRIGHT_MODE, 'Light'),
-    # ]
-    # word_mark = models.CharField(
-    #     max_length=1,
-    #     verbose_name='word_mark',
-    #     choices=WORD_MARK_CHOICES,
-    #     default=VIEWED,
-    # )
+    # choice field
+    DEFAULT = 'DF'
+    DARK_MODE = 'DK'
+    BRIGHT_MODE = 'BR'
+    SCREEN_CHOICES = [
+        (DEFAULT, 'Default'),
+        (DARK_MODE, 'Dark'),
+        (BRIGHT_MODE, 'Light'),
+    ]
     screen_mode = models.CharField(
-        max_length=32,
+        max_length=2,
+        choices=SCREEN_CHOICES,
         verbose_name='screen_mode',
         default='default_theme'
     )
+
+    # data fields
     txt_size = models.DecimalField(
         max_digits=3, decimal_places=1,
         validators=[MinValueValidator(7), MaxValueValidator(25)],

@@ -9,15 +9,53 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
 from app4_docs.models import UserDocs
-from app10_subscription.models import Subscription
-from app10_subscription.models import UsageLimits
+from app4_docs.forms import DocCreationText
+from app4_docs.forms import DocCreationFile
+from app4_docs.forms import DocCreationImage
+
 # Create your views here.
 
 
-class DocCreate(CreateView):
+class DocCreationTextView(FormView):
     model = UserDocs
-    fields = '__all__'
+    form_class = DocCreationText
     template_name = "doc_create.html"
+    success_url = "/"  # "/docs/list/"
+
+    def get_form_kwargs(self, **kwargs):
+        kw = super().get_form_kwargs(**kwargs)
+        kw.update(
+            {'request': self.request}
+        )
+        return kw
+
+
+class DocCreationFileView(FormView):
+    model = UserDocs
+    form_class = DocCreationFile
+    template_name = "doc_create.html"
+    success_url = "/"  # "/docs/list/"
+
+    def get_form_kwargs(self, **kwargs):
+        kw = super().get_form_kwargs(**kwargs)
+        kw.update(
+            {'request': self.request}
+        )
+        return kw
+
+
+class DocCreationImageView(FormView):
+    model = UserDocs
+    form_class = DocCreationImage
+    template_name = "doc_create.html"
+    success_url = "/"  # "/docs/list/"
+
+    def get_form_kwargs(self, **kwargs):
+        kw = super().get_form_kwargs(**kwargs)
+        kw.update(
+            {'request': self.request}
+        )
+        return kw
 
 
 class DocList(ListView):
@@ -26,11 +64,6 @@ class DocList(ListView):
 
 class Recent(ListView):
     pass
-
-
-class ModelUpdateView(UpdateView):
-    model = UserDocs
-    template_name = "doc_update.html"
 
 
 def docs_update(request, pk):
